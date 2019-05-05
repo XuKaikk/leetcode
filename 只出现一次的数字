@@ -1,0 +1,67 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class Solution
+{
+public:
+	/*//测试用
+	void dayin(vector<int> &nums)
+	{
+		for (int i = 0; i < nums.size(); i++)
+		{
+			cout << nums[i] << ',';
+		}
+		cout << endl;
+	}
+	*/
+	int singleNumber(vector<int>& nums)
+	{
+		int a = 0;
+		//dayin(nums);
+		int k = nums.size();
+		int p = nums.size();
+		auto it = nums.begin();
+
+		for(int i =0;i<k;i++)//从第一个数据开始遍历，当存在与第一个数相等的数时，从容器中删除它们两个。
+		{
+			for (int j = 1; j < k; j++)
+			{
+				if (*it == nums[j])
+				{
+					it = nums.erase(it);
+					nums.erase(nums.begin() + j-1);
+					k = nums.size();
+				}
+				//dayin(nums);
+			}
+			//以下两语句作用：当查找结果（只出现一次的数字）在容器中间时，不用遍历完整个过程。
+			if (p == k) return nums[0];
+			else p = k;
+		}
+		return nums[0];
+	}
+
+};
+
+
+int main(void)
+{
+	vector<int> test;
+	test.push_back(2);
+	test.push_back(4);
+	test.push_back(3);
+	test.push_back(1);
+	test.push_back(2);
+	test.push_back(3);
+	test.push_back(1);
+
+	Solution s;
+	int i = s.singleNumber(test);
+
+	cout << "只出现一次的数字："<< i << endl;
+
+	system("pause");
+	return 0;
+}
