@@ -1,0 +1,41 @@
+/*
+因为题目给定：每行的元素从左到右升序排列，每列的元素从上到下升序排列。
+所以想着通过比较target和第一行数据来优化搜索列数，比较target和第一列数据来优化搜索行数。
+*/
+class Solution
+{
+public:
+	bool serchMatrix(vector<vector<int>>& matrix, int target)
+	{
+		if ((matrix.size() == 0)||(matrix[0].size()==0)) return false;//判断是否空数组，[]或[[]]
+		int i = 0;
+		int j = 0;
+		int column = matrix[0].size(); //优化后搜索列数
+		int row = matrix.size(); //优化后搜索行数
+    if (target > martix[row][column]) return false; //目标数大于数组最大的数，必定不在数组内。
+		for (i = 0; i < matrix.size(); i++)
+		{
+			if (target < matrix[i][0])
+			{
+				row = i; break;
+			}
+		}
+		for (j = 0; j < matrix[0].size(); j++)
+		{
+			if (target < matrix[0][j])
+			{
+				column = j;
+				break;
+			}
+		}
+
+		for (i = 0; i < row; i++)
+		{
+			for (j = 0; j < column; j++)
+			{
+				if (target == matrix[i][j]) return true;
+			}
+		}
+		return false;
+	}
+};
