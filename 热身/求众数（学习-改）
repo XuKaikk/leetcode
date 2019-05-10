@@ -1,0 +1,24 @@
+/*
+思路:从第一个数开始count=1，遇到相同的就加1，遇到不同的就减1，减到0就重新换个数开始计数，总能找到最多的那个。
+注意：本方法只适用于本题目（题目假设该组数据非空且一定有众数。）。
+*/
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) 
+    {
+        int p = nums.size();
+		int a = nums[0];
+		int count = 1;
+		for (int i = 1; i < p; i++)
+		{
+			if (a == nums[i]) count++;
+			else count--;
+			if (count == 0)
+			{
+				a = nums[i];
+				count = 1;
+			}
+		}
+		return a;
+    }
+};
