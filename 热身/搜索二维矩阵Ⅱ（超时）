@@ -12,7 +12,7 @@ public:
 		int j = 0;
 		int column = matrix[0].size(); //优化后搜索列数
 		int row = matrix.size(); //优化后搜索行数
-   		if (target > martix[row][column]) return false; //目标数大于数组最大的数，必定不在数组内。
+   		if (target > matrix[row][column]) return false; //目标数大于数组最大的数，必定不在数组内。
 		for (i = 0; i < matrix.size(); i++)
 		{
 			if (target < matrix[i][0])
