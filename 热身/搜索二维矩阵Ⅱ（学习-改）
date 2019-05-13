@@ -1,0 +1,30 @@
+/*
+思路学习自leetcode该题评论者@江五渣
+分治法。
+  左下角的元素是这一行中最小的元素，同时又是这一列中最大的元素。比较左下角元素和目标：
+  若左下角元素等于目标，则找到
+  若左下角元素大于目标，则目标不可能存在于当前矩阵的最后一行，问题规模可以减小为在去掉最后一行的子矩阵中寻找目标
+  若左下角元素小于目标，则目标不可能存在于当前矩阵的第一列，问题规模可以减小为在去掉第一列的子矩阵中寻找目标
+  若最后矩阵减小为空，则说明不存在
+*/
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if ((matrix.size() == 0)||(matrix[0].size()==0)) return false;
+		int column = matrix[0].size(); //搜索列数
+		int row = matrix.size(); //搜索行数
+
+		if (target > matrix[row-1][column-1]) return false;  //数组右下角是本组数据最大的数
+
+
+		int i = row-1;//i、j表示搜索中变化的下标
+		int j = 0;
+		while (i >= 0 && j != column)
+		{
+			if (target < matrix[i][j]) i--;
+			else if (target > matrix[i][j]) j++;
+			else return true;
+		}
+		return false;
+    }
+};
